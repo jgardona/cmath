@@ -129,28 +129,6 @@ func BenchmarkPoint(b *testing.B) {
 	})
 }
 
-func BenchmarkDeltaFunction(b *testing.B) {
-	p1 := NewPoint(2.57134, 2.57134)
-	p2 := NewPoint(2.57136, 2.57136)
-	for i := 0; i < b.N; i++ {
-		_ = Delta(p1, p2)
-	}
-}
-
-func TestDeltaFunction(t *testing.T) {
-	t.Run("must 2.57134 be equals 2.57136 camparing delta", func(t *testing.T) {
-		p1 := NewPoint(2.57134, 2.57134)
-		p2 := NewPoint(2.57136, 2.57136)
-		assert.True(t, Delta(p1, p2))
-	})
-
-	t.Run("must 2.5234 be not equals 2.57156 camparing delta", func(t *testing.T) {
-		p1 := NewPoint(2.57234, 2.57234)
-		p2 := NewPoint(2.57156, 2.57156)
-		assert.True(t, !Delta(p1, p2))
-	})
-}
-
 func TestPoint(t *testing.T) {
 	t.Run("test distance to another point", func(t *testing.T) {
 		p1 := NewPoint(1, 2)
@@ -172,6 +150,8 @@ func TestPoint(t *testing.T) {
 		p3 := NewPoint(5, 6)
 		result := p1.Sum(p2).Multiply(3).Sum(p1.Subtract(p3))
 		assert.Equal(t, NewPoint(8, 14), result)
+		assert.Equal(t, 8, result.X())
+		assert.Equal(t, 14, result.Y())
 	})
 
 	t.Run("test division by zero must panic", func(t *testing.T) {
@@ -179,5 +159,12 @@ func TestPoint(t *testing.T) {
 		assert.Panics(t, func() {
 			p1.Divide(0.0)
 		})
+	})
+
+	t.Run("test if p1 is equals to p2", func(t *testing.T) {
+		p1 := NewPoint(1, 2)
+		p2 := NewPoint(1, 2)
+		result := p1.Equals(p2)
+		assert.True(t, result)
 	})
 }
