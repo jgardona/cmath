@@ -14,6 +14,7 @@ func TestStatisticsPackage(t *testing.T) {
 	histogramEntropyTest3 := []int{1, 2, 3, 4}
 	histogramNormal := []int{1, 3, 6, 9, 6, 3, 1}
 	histogramEmpty := []int{}
+	histogramTestMode := []int{1, 1, 2, 3, 6, 8, 11, 12, 7, 3}
 
 	t.Run("the Mean must be", func(t *testing.T) {
 		result := Mean(histogram)
@@ -67,6 +68,11 @@ func TestStatisticsPackage(t *testing.T) {
 
 		result = Entropy(histogramEntropyTest3)
 		assert.InDelta(t, 1.846, result, 0.001)
+	})
+
+	t.Run("Mode must return seven", func(t *testing.T) {
+		result := Mode(histogramTestMode)
+		assert.Equal(t, 7, result)
 	})
 
 }

@@ -1,3 +1,6 @@
+// # Statistics
+//
+// Set of statistics functions for golang
 package statistics
 
 import (
@@ -6,6 +9,11 @@ import (
 	"github.com/jgardona/cmath/ranges"
 )
 
+// Mean calculates the mean.
+//
+// The input array is treated as histogram, i.e. its
+// indexes are treated as velues of stochastic function, but
+// array values are threated as probabilities (total amount of hits).
 func Mean(histogram []int) float64 {
 	var (
 		mean  float64 = 0.0
@@ -24,6 +32,12 @@ func Mean(histogram []int) float64 {
 	}
 }
 
+// stdDevMean is only used inside statistics package.
+// It calculates the standard deviation using the mean value.
+//
+// The input array is treated as histogram, i.e. its
+// indexes are treated as velues of stochastic function, but
+// array values are threated as probabilities (total amount of hits).
 func stdDevMean(histogram []int, mean float64) float64 {
 	var (
 		total  int     = 0
@@ -43,10 +57,22 @@ func stdDevMean(histogram []int, mean float64) float64 {
 	}
 }
 
+// StdDev calculates the standard deviation.
+// The input array is treated as histogram, i.e. its
+// indexes are treated as velues of stochastic function, but
+// array values are threated as probabilities (total amount of hits).
 func StdDev(histogram []int) float64 {
 	return stdDevMean(histogram, Mean(histogram))
 }
 
+// Median calculates the median value
+//
+// The input array is treated as histogram, i.e. its
+// indexes are treated as velues of stochastic function, but
+// array values are threated as probabilities (total amount of hits).
+//
+// The median value is calculated accumulating histogram's values
+// starting from the left point until the sum reaches 50% of histogram's sum.
 func Median(histogram []int) int {
 	var total int = 0
 
@@ -67,6 +93,10 @@ func Median(histogram []int) int {
 	return median
 }
 
+// Range gets the range around the median containing specified percentage of values.
+//
+// The method calculates ranges of stochastic variable, wihch summary probability
+// comprises the specified percentage of histogram's hits.
 func Range(histogram []int, percent float64) ranges.Range[int] {
 	var total, n int = 0, len(histogram)
 
@@ -95,6 +125,11 @@ func Range(histogram []int, percent float64) ranges.Range[int] {
 	return ranges.NewRange(min, max)
 }
 
+// Entropy calculates the entropy value.
+//
+// The input array is treated as histogram, i.e. its
+// indexes are treated as velues of stochastic function, but
+// array values are threated as probabilities (total amount of hits).
 func Entropy(histogram []int) float64 {
 	var (
 		total   float64 = 0.0
@@ -117,6 +152,24 @@ func Entropy(histogram []int) float64 {
 	return entropy
 }
 
+// Mode calculates mode value.
+//
+// Returns mode value of the histogram array.
+//
+// The input array is treated as histogram, i.e. its
+// indexes are treated as velues of stochastic function, but
+// array values are threated as probabilities (total amount of hits).
+//
+// # Note
+//
+// Returns the minimum mode value if the specified histogram is multimodal.
 func Mode(histogram []int) int {
-	panic("not yet implemented")
+	var mode, curmax int = 0, 0
+	for i, e := range histogram {
+		if e > curmax {
+			curmax = e
+			mode = i
+		}
+	}
+	return mode
 }
