@@ -10,3 +10,20 @@ func Delta(a, b float64) bool {
 
 	return delta
 }
+
+// Pop pops the latest element from a slice.
+func Pop[T ~string | ~int | float64](s *[]T) T {
+	if len(*s) == 0 {
+		var zero T
+		return zero
+	}
+	poppedValue := (*s)[len(*s)-1]
+	*s = (*s)[:len(*s)-1]
+
+	return poppedValue
+}
+
+// Push pushes an element to the end of a slice.
+func Push[T ~string | ~int | float64](s *[]T, v T) {
+	*s = append(*s, v)
+}
