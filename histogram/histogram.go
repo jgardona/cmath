@@ -25,8 +25,8 @@ type Histogram struct {
 }
 
 // NewHistogram instantiates a histogram given an int array.
-func NewHistogram(histogram []int) *Histogram {
-	data := &Histogram{values: histogram}
+func NewHistogram(histogram []int) Histogram {
+	data := Histogram{values: histogram}
 	data.Update()
 	return data
 }
