@@ -59,47 +59,82 @@ func (v Vec3) Norm() float64 {
 }
 
 func (v Vec3) Dot() float64 {
-	panic("not yet implemented")
+	return v.x*v.x + v.y*v.y + v.z*v.z
 }
 
-func (v Vec3) AsArray() []float64 {
-	panic("not yet implemented")
+func (v Vec3) AsArray() [3]float64 {
+	return [3]float64{v.x, v.y, v.z}
 }
 
 func (v Vec3) Sum(vec Vec3) Vec3 {
-	panic("not yet implemented")
+	sx := v.x + vec.x
+	sy := v.y + vec.y
+	sz := v.z + vec.z
+
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) SumScalar(scalar float64) Vec3 {
-	panic("not yet implemented")
+	sx := v.x + scalar
+	sy := v.y + scalar
+	sz := v.z + scalar
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) Subtract(vec Vec3) Vec3 {
-	panic("not yet implemented")
+	sx := v.x - vec.x
+	sy := v.y - vec.y
+	sz := v.z - vec.z
+
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) SubScalar(scalar float64) Vec3 {
-	panic("not yet implemented")
+	sx := v.x - scalar
+	sy := v.y - scalar
+	sz := v.z - scalar
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) Multiply(vec Vec3) Vec3 {
-	panic("not yet implemented")
+	sx := v.x * vec.x
+	sy := v.y * vec.y
+	sz := v.z * vec.z
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) MulScalar(scalar float64) Vec3 {
-	panic("not yet implemented")
+	sx := v.x * scalar
+	sy := v.y * scalar
+	sz := v.z * scalar
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) Divide(vec Vec3) Vec3 {
-	panic("not yet implemented")
+	if vec.x == 0.0 || vec.y == 0.0 || vec.z == 0.0 {
+		panic("cant divide by zero")
+	}
+	sx := v.x / vec.x
+	sy := v.y / vec.y
+	sz := v.z / vec.z
+	return NewVec3(sx, sy, sz)
 }
 
 func (v Vec3) DivScalar(scalar float64) Vec3 {
-	panic("not yet implemented")
+	if scalar == 0.0 {
+		panic("cant divide by zero")
+	}
+	sx := v.x / scalar
+	sy := v.y / scalar
+	sz := v.z / scalar
+	return NewVec3(sx, sy, sz)
 }
 
-func (v Vec3) Equals(vec Vec3) bool {
-	panic("not yet implemented")
+func (v Vec3) Equals(vec Vec3, epsilon float64) bool {
+	dx := math.Abs(v.x-vec.x) < epsilon
+	dy := math.Abs(v.y-vec.y) < epsilon
+	dz := math.Abs(v.z-vec.z) < epsilon
+	return dx && dy && dz
 }
 
 func (v Vec3) Normalize() float64 {
@@ -124,4 +159,16 @@ func Dot(a, b Vec3) float64 {
 
 func (v Vec3) AsVec4() Vec4 {
 	panic("not yet implemented")
+}
+
+func (v Vec3) X() float64 {
+	return v.x
+}
+
+func (v Vec3) Y() float64 {
+	return v.y
+}
+
+func (v Vec3) Z() float64 {
+	return v.z
 }
