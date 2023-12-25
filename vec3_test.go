@@ -132,4 +132,12 @@ func TestVec3(t *testing.T) {
 		vec := NewVec3(1.0, 0.666, 0.333)
 		assert.True(t, result.Equals(vec, 0.001))
 	})
+
+	t.Run("test normalization method", func(t *testing.T) {
+		result := v2.Normalize()
+		assert.InDelta(t, 3.7416573867739413, result, 0.0000000000000001)
+		assert.InDelta(t, 0.801, v2.X(), 0.001)
+		assert.InDelta(t, 0.534, v2.Y(), 0.001)
+		assert.InDelta(t, 0.267, v2.Z(), 0.001)
+	})
 }

@@ -137,8 +137,13 @@ func (v Vec3) Equals(vec Vec3, epsilon float64) bool {
 	return dx && dy && dz
 }
 
-func (v Vec3) Normalize() float64 {
-	panic("not yet implemented")
+func (v *Vec3) Normalize() float64 {
+	norm := v.Norm()
+	invn := 1.0 / norm
+	v.x *= invn
+	v.y *= invn
+	v.z *= invn
+	return norm
 }
 
 func (v Vec3) Inverse() Vec3 {
