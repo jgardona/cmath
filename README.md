@@ -69,7 +69,7 @@ Set of statistics functions for golang.
 - Calculates histogram's entropy.
 
 ```go
-entropy := statistics.Entropy([1, 2, 3, 5])
+entropy := statistics.Entropy([]int{1, 2, 3, 5})
 ```
 
 ### Vectors
