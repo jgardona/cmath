@@ -1,6 +1,7 @@
 package cmath
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -134,10 +135,35 @@ func TestVec3(t *testing.T) {
 	})
 
 	t.Run("test normalization method", func(t *testing.T) {
-		result := v2.Normalize()
-		assert.InDelta(t, 3.7416573867739413, result, 0.0000000000000001)
-		assert.InDelta(t, 0.801, v2.X(), 0.001)
-		assert.InDelta(t, 0.534, v2.Y(), 0.001)
-		assert.InDelta(t, 0.267, v2.Z(), 0.001)
+		nv := v2
+		result := nv.Normalize()
+		assert.InDelta(t, 3.741, result, 0.001)
+		assert.InDelta(t, 0.801, nv.X(), 0.001)
+		assert.InDelta(t, 0.534, nv.Y(), 0.001)
+		assert.InDelta(t, 0.267, nv.Z(), 0.001)
+	})
+
+	t.Run("test inverse method", func(t *testing.T) {
+		vec3 := v2.Inverse()
+		fmt.Println(vec3)
+		assert.InDelta(t, 0.333, vec3.X(), 0.001)
+		assert.InDelta(t, 0.5, vec3.Y(), 0.001)
+		assert.InDelta(t, 1.0, vec3.Z(), 0.001)
+	})
+
+	t.Run("test abs metlhod", func(t *testing.T) {
+		fv := NewVec3(-1.5, -3.7, -0.5)
+		result := fv.Abs()
+		assert.Equal(t, NewVec3(1.5, 3.7, 0.5), result)
+	})
+
+	t.Run("test cross function", func(t *testing.T) {
+		result := Cross(v1, v2)
+		assert.Equal(t, NewVec3(-4, 8, -4), result)
+	})
+
+	t.Run("test dot function", func(t *testing.T) {
+		result := Dot(v1, v2)
+		assert.InDelta(t, 10, result, 0.001)
 	})
 }

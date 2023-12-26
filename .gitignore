@@ -1,4 +1,4 @@
 
-pexpr/pexpr.test
-pexpr/mem.prof
-cmath.test
+*.test
+mem.prof
+profile*.png
