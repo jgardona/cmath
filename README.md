@@ -43,6 +43,7 @@ stddev := hist.StdDev()
 min := hist.Min()
 max := hist.Max()
 ```
+
 ### Ranges
 
 Generic data structure that represents an integer or float interval.
@@ -51,7 +52,7 @@ Generic data structure that represents an integer or float interval.
 
 ```go
 r1 := NewRange(-0.5, 1.0)
-r2 := NewRange(1.0, 1.5)
+r2 := NewRange(1.0, 0.7)
 
 if r1.IsRangeInside(r2) {
     println("r2 is inside r1")
@@ -70,6 +71,27 @@ Set of statistics functions for golang.
 ```go
 entropy := statistics.Entropy([1, 2, 3, 5])
 ```
+
+### Vectors
+
+3D vector structure with x, y, z coordinates.
+
+- Initializing vectors.
+
+```go
+
+v1 := cmath.NewVec3(3.0, 2.0)
+// calculates the dot product with himself
+result := v1.Dot()
+v2 := cmath.NewVec3(1.0, 3.0)
+// calculates the dot product of two vectors
+dotresult := cmath.Dot(v1, v2)
+crossresult := cmath.Cross(v1, v2)
+// sum two vectors
+sumresult := v1.Sum(v2)
+```
+
+### Polish expressions
 
 ## References
 [Aforge.Net](https://github.com/andrewkirillov/AForge.NET)
