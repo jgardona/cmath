@@ -1,6 +1,7 @@
 # cmath
 
-A core math package for golang, with statistics, histogram, points and ranges data structures and functions.
+A core math module for golang, with statistics, histogram, points, ranges and more math tools. This module is almost a port of the core and math libraries of Aforge.Net.
+
 ## Usage
 
 ### Points
