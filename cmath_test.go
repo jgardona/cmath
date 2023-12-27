@@ -40,3 +40,23 @@ func TestReturnEmptyValue(t *testing.T) {
 	value := Pop(&data)
 	assert.Equal(t, 0.0, value)
 }
+
+func TestSumFunction(t *testing.T) {
+	data := []int{1, 2, 3}
+	result := Sum(data...)
+	assert.Equal(t, 6, result)
+}
+
+func TestTestProdFunction(t *testing.T) {
+	t.Run("must prod [1, 2, 3]=6", func(t *testing.T) {
+		data := []int{1, 2, 3}
+		result := Prod(data...)
+		assert.Equal(t, 6, result)
+	})
+
+	t.Run("must prod [2, 2, 3]=12", func(t *testing.T) {
+		data := []int{2, 2, 3}
+		result := Prod(data...)
+		assert.Equal(t, 12, result)
+	})
+}
