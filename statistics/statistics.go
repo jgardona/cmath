@@ -6,6 +6,7 @@ package statistics
 import (
 	"math"
 
+	"github.com/jgardona/cmath"
 	"github.com/jgardona/cmath/ranges"
 )
 
@@ -17,11 +18,10 @@ import (
 func Mean(histogram []int) float64 {
 	var (
 		mean  float64 = 0.0
-		total int     = 0.0
+		total int     = cmath.Sum(histogram...)
 	)
 
 	for i, e := range histogram {
-		total += e
 		mean += float64(i * e)
 	}
 
@@ -74,11 +74,7 @@ func StdDev(histogram []int) float64 {
 // The median value is calculated accumulating histogram's values
 // starting from the left point until the sum reaches 50% of histogram's sum.
 func Median(histogram []int) int {
-	var total int = 0
-
-	for _, e := range histogram {
-		total += e
-	}
+	var total int = cmath.Sum(histogram...)
 
 	htotal := total / 2
 	median := 0
@@ -98,12 +94,7 @@ func Median(histogram []int) int {
 // The method calculates ranges of stochastic variable, wihch summary probability
 // comprises the specified percentage of histogram's hits.
 func Range(histogram []int, percent float64) ranges.Range[int] {
-	var total, n int = 0, len(histogram)
-
-	// accumulate total
-	for _, e := range histogram {
-		total += e
-	}
+	var total, n int = cmath.Sum(histogram...), len(histogram)
 
 	var min, max, hits int = 0, 0, total
 	h := int(float64(total) * (percent + (1.0-percent)/2.0))
@@ -132,14 +123,10 @@ func Range(histogram []int, percent float64) ranges.Range[int] {
 // array values are threated as probabilities (total amount of hits).
 func Entropy(histogram []int) float64 {
 	var (
-		total   float64 = 0.0
+		total   float64 = float64(cmath.Sum(histogram...))
 		entropy float64 = 0.0
 		p       float64 = 0.0
 	)
-
-	for _, e := range histogram {
-		total += float64(e)
-	}
 
 	if total != 0 {
 		for _, e := range histogram {
