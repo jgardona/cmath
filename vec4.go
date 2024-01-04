@@ -1,5 +1,7 @@
 package cmath
 
+import "math"
+
 type Vec4 struct {
 	x float64
 	y float64
@@ -8,7 +10,7 @@ type Vec4 struct {
 }
 
 func NewVec4(x, y, z, w float64) Vec4 {
-	panic("not yet implemented")
+	return Vec4{x, y, z, w}
 }
 
 func (v Vec4) X() float64 {
@@ -16,7 +18,15 @@ func (v Vec4) X() float64 {
 }
 
 func (v Vec4) Min() float64 {
-	panic("not yet implemented")
+	a := math.Min(v.x, v.y)
+	b := math.Min(v.z, v.w)
+	return math.Min(a, b)
+}
+
+func (v Vec4) Max() float64 {
+	a := math.Max(v.x, v.y)
+	b := math.Max(v.z, v.w)
+	return math.Max(a, b)
 }
 
 func (v Vec4) Y() float64 {
