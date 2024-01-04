@@ -80,10 +80,10 @@ entropy := statistics.Entropy([]int{1, 2, 3, 5})
 
 ```go
 
-v1 := cmath.NewVec3(3.0, 2.0)
+v1 := cmath.NewVec3(3.0, 2.0, 1.0)
 // calculates the dot product with himself
 result := v1.Dot()
-v2 := cmath.NewVec3(1.0, 3.0)
+v2 := cmath.NewVec3(1.0, 2.0, 3.0)
 // calculates the dot product of two vectors
 dotresult := cmath.Dot(v1, v2)
 crossresult := cmath.Cross(v1, v2)
